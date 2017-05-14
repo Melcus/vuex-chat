@@ -2,6 +2,11 @@
 
 @section('content')
 	<div class="container">
-		<conversations-dashboard></conversations-dashboard>
+
+
+			<conversations-dashboard
+					:id="{{ isset($conversation) ? $conversation->id : json_encode(null)}}"
+			></conversations-dashboard>
+		
 	</div>
 @endsection
