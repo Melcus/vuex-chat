@@ -10,6 +10,8 @@
             <li><strong>In conversation : </strong></li>
             <li v-for="user in conversation.users.data"> {{ user.name}} </li>
         </ul>
+
+        <conversation-add-user-form></conversation-add-user-form>
         <hr>
         <conversation-reply-form></conversation-reply-form>
         <hr>

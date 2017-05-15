@@ -27,13 +27,40 @@ const actions = {
     },
 
     createConversationReply({dispatch, commit}, {id, body}) {
-       return api.StoreConversationReply(id, {
-            body : body
-        }).then((response)=> {
-           commit('appendToConversation', response.data.data);
-           commit('prependToConversations', response.data.data.parent.data);
+        return api.StoreConversationReply(id, {
+            body: body
+        }).then((response) => {
+            commit('appendToConversation', response.data.data);
+            commit('prependToConversations', response.data.data.parent.data);
 
-       } )
+        })
+    },
+
+    createConversation({dispatch, commit}, {body, recipientIds}) {
+        return api.StoreConversation({
+            body: body,
+            recipientIds: recipientIds
+        }).then((response) => {
+            commit('setConversation', response.data.data);
+            // OR     dispatch('getConversation', response.data.data.id);
+            commit('prependToConversations', response.data.data);
+            // console.log(response)
+
+        })
+    },
+
+
+    addConversationUsers({dispatch, commit}, {id, recipientIds}) {
+        return api.StoreConversationUsers(id, {
+            recipientIds: recipientIds
+        }).then((response) => {
+            commit('UpdateUsersInConversation', response.data.data.users.data)
+            // commit addUsersToconversation
+            // commit updateConversationInlist
+
+            commit('updateConversationInList', response.data.data)
+
+        })
     }
 };
 
@@ -46,6 +73,9 @@ const mutations = {
     },
     appendToConversation (state, reply) {
         state.conversation.replies.data.unshift(reply);
+    },
+    UpdateUsersInConversation(state, users) {
+        state.conversation.users.data = users
     }
 };
 
