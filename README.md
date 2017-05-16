@@ -21,7 +21,7 @@
 - [ ] If Author, avatar on the right side
 - [ ] Update time ago (moment js)
 
-## SS
+## Screenshot
 ![Chat demo](https://image.prntscr.com/image/b13ad61b11f441609e596113ca81fdfd.png)
 
 
@@ -40,7 +40,7 @@ If you discover any security related issues, please email tirdea.mihail@vlinde.c
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT)
 
 
 [ico-version]: https://img.shields.io/packagist/v/:vendor/:package_name.svg?style=flat-square
