@@ -11,6 +11,13 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
+
+use App\Models\Conversation;
+
+Broadcast::channel('user{id}*', function ($user, $id) {
+	return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('conversation{id}*' , function ($user , $conversationId) {
+	return $user->isInConversation(Conversation::find($conversationId));
 });

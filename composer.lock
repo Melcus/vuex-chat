@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "57e52ec4d86a8afe78ec29ef404e440c",
-    "content-hash": "1b39114313ecc900dbb1c029b608de24",
+    "hash": "20c589becba27eb6e44e5f75453fc97d",
+    "content-hash": "cb9b30aec894269069ee697447e12cd7",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -418,16 +418,16 @@
         },
         {
             "name": "laravel/scout",
-            "version": "v3.0.3",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/scout.git",
-                "reference": "64d28db58a054174eadf1d4df38dad81ff7e68dd"
+                "reference": "c822eaff08929439879407ffa27de7966f3c5926"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/scout/zipball/64d28db58a054174eadf1d4df38dad81ff7e68dd",
-                "reference": "64d28db58a054174eadf1d4df38dad81ff7e68dd",
+                "url": "https://api.github.com/repos/laravel/scout/zipball/c822eaff08929439879407ffa27de7966f3c5926",
+                "reference": "c822eaff08929439879407ffa27de7966f3c5926",
                 "shasum": ""
             },
             "require": {
@@ -474,7 +474,7 @@
                 "laravel",
                 "search"
             ],
-            "time": "2017-04-09 00:54:26"
+            "time": "2017-05-09 12:31:27"
         },
         {
             "name": "laravel/tinker",
@@ -1074,6 +1074,50 @@
                 "shell"
             ],
             "time": "2017-05-12 15:41:55"
+        },
+        {
+            "name": "pusher/pusher-php-server",
+            "version": "2.6.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pusher/pusher-http-php.git",
+                "reference": "7101edc482d1b1de027abadd7a80a0d00222ef08"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/7101edc482d1b1de027abadd7a80a0d00222ef08",
+                "reference": "7101edc482d1b1de027abadd7a80a0d00222ef08",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for interacting with the Pusher REST API",
+            "homepage": "https://github.com/pusher/pusher-php-server",
+            "keywords": [
+                "events",
+                "php-pusher-server",
+                "publish",
+                "pusher",
+                "realtime",
+                "rest",
+                "trigger"
+            ],
+            "time": "2016-12-22 10:46:28"
         },
         {
             "name": "ramsey/uuid",

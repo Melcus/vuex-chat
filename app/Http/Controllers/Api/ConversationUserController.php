@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\UserAddedToConversation;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreConversationUserRequest;
 use App\Models\Conversation;
@@ -17,16 +18,17 @@ class ConversationUserController extends Controller
 		$conversation->users()->syncWithoutDetaching($request->recipients);
 		
 		$conversation->load(['users']);
-		//refresh users
+		
+		broadcast(new UserAddedToConversation($conversation))->toOthers();
+		
+		
 		return fractal()
 			->item($conversation)
 			->parseIncludes(['user' , 'users'])
 			->transformWith(new ConversationTransformer())
 			->toArray();
 		
-		// authorize
-		// sync users
-		//return conversation
+		
 		
 		
 	}

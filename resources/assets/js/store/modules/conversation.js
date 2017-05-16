@@ -17,12 +17,26 @@ const getters = {
 const actions = {
     getConversation({dispatch, commit}, id) {
         commit('setConversationLoading', true);
+
+        //leave channel
+        if (state.conversation) {
+            Echo.leave('conversation' + state.conversation.id);
+        }
         api.getConversation(id).then((response) => {
             commit('setConversation', response.data.data);
             commit('setConversationLoading', false);
 
+            Echo.private('conversation' + id)
+                .listen('ConversationReplyCreated', (e) => {
+                    commit('appendToConversation', e.data)
+                }).listen('UserAddedToConversation', (e) => {
+                commit('UpdateUsersInConversation', e.data.users.data)
+            });
+
+
             window.history.pushState(null, null, '/conversations/' + id)
-        })
+        });
+
 
     },
 
@@ -53,12 +67,13 @@ const actions = {
     addConversationUsers({dispatch, commit}, {id, recipientIds}) {
         return api.StoreConversationUsers(id, {
             recipientIds: recipientIds
+
         }).then((response) => {
-            commit('UpdateUsersInConversation', response.data.data.users.data)
+            commit('UpdateUsersInConversation', response.data.data.users.data);
             // commit addUsersToconversation
             // commit updateConversationInlist
 
-            commit('updateConversationInList', response.data.data)
+            commit('updateConversationInList', response.data.data);
 
         })
     }

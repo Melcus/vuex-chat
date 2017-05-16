@@ -25,6 +25,18 @@ const actions = {
 
             commit('setConversations', response.data.data);
             commit('setConversationsLoading', false);
+
+            // console.log('user' + Laravel.user.id);
+            Echo.private('user' + Laravel.user.id)
+                .listen('ConversationCreated', (e) => {
+                    commit('prependToConversations', e.data)
+                }).listen('ConversationReplyCreated', (e) => {
+                commit('prependToConversations', e.data.parent.data)
+                }).listen('UserAddedToConversation', (e) => {
+                commit('updateConversationInList', e.data)
+            });
+
+
         })
 
     }
@@ -49,10 +61,9 @@ const mutations = {
 
     updateConversationInList(state, conversation) {
         state.conversations = state.conversations.map((c) => {
-            if(c.id === conversation.id) {
+            if (c.id === conversation.id) {
                 return conversation
             }
-
             return c
         })
     }

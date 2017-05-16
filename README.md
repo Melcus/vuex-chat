@@ -1,4 +1,5 @@
-# Real time chat with Laravel, Vue js, Vuex, Echo and pusher (WIP)
+# Real time chat with Laravel, Vue js, Vuex, Echo and pusher 
+# *Alpha* version
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -10,13 +11,13 @@
 
 ## To DO
 
-- [ ] Everything
-
-
-
-
-
-
+- [ ] Message read status(notifications) + counter of unread messages on every conversation (redis)
+- [ ] New conversation transition
+- [ ] New reply transition
+- [ ] is typing event broadcast (expensive)
+- [ ] Remove users from chat + animation ( on leave and enter )
+- [ ] Emoji
+- [ ] Web notifications
 
 ## Testing
 

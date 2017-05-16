@@ -12,6 +12,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Scripts -->
+    <script>
+        window.Laravel = <?php echo json_encode([
+        	'user' => [
+        		'id' => Auth::check() ? Auth::user()->id : null
+            ]
+        ]); ?>
+    </script>
 </head>
 <body>
     <div id="app">
