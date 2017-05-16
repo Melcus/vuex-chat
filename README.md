@@ -18,12 +18,20 @@
 - [ ] Remove users from chat + animation ( on leave and enter )
 - [ ] Emoji
 - [ ] Web notifications
+- [ ] If Author, avatar on the right side
+- [ ] Update time ago (moment js)
+
+## SS
+![Chat demo](https://image.prntscr.com/image/b13ad61b11f441609e596113ca81fdfd.png)
+
 
 ## Testing
 
 ``` bash
 soon
 ```
+
+
 
 ## Security
 
