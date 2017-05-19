@@ -4,10 +4,12 @@
             All conversations
         </div>
 
-        <div class="panel-body">
+
             <div v-if="loading" class="loader"></div>
-            <div class="media" v-for="conversation in conversations" v-else-if="conversations.length">
-                <div class="media-body">
+            <transition-group name="list" tag="div" v-else-if="conversations.length">
+            <div  :class="['conversation-thread', current_conversation && (current_conversation.id === conversation.id) ? 'in_focus' : '' ]" v-for="conversation in conversations"   :key="conversation.id">
+
+                <div class="media-body" >
                     <a href="#" @click.prevent="getConversation(conversation.id)"> {{ trunc(conversation.body, 50) }}</a>
                     <p class="text-muted">
                         You and {{ conversation.participant_count }} {{ pluralize('other', conversation.participant_count) }}
@@ -20,12 +22,16 @@
                         <li> Last reply {{ conversation.last_reply_human }}</li>
                     </ul>
                 </div>
+
             </div>
-            <div class="" v-else>
-                No conversations
+            </transition-group>
+
+
+            <div class="text-center" v-else>
+               <h4> No conversations</h4>
             </div>
         </div>
-    </div>
+
 
 </template>
 
@@ -37,6 +43,7 @@
     export default {
         computed: mapGetters({
             conversations: 'allConversations',
+            current_conversation : 'currentConversation',
             loading: 'loadingConversations'
         }),
         methods: {
@@ -53,3 +60,21 @@
         }
     }
 </script>
+
+<style>
+    .in_focus {
+        background: rgba(242, 242, 242, 0.6);;
+        border-radius: 5px;
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+    }
+
+
+
+    .conversation-thread {
+        padding:15px;
+    }
+</style>

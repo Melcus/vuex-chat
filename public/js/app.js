@@ -20428,21 +20428,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 var _vuex = __webpack_require__(6);
 
 exports.default = {
     props: ['id'],
+    data: function data() {
+        return {
+            user_id: null
+        };
+    },
+
     computed: (0, _vuex.mapGetters)({
         conversation: 'currentConversation',
         loading: 'loadingConversation'
@@ -20450,6 +20446,8 @@ exports.default = {
     methods: _extends({}, (0, _vuex.mapActions)(['getConversation'])),
 
     mounted: function mounted() {
+        this.user_id = Laravel.user.id;
+        //            console.log(Laravel.user.id);
         if (this.id !== null) {
             this.getConversation(this.id);
             //              OR  this.$store.dispatch('getConversation', this.id);
@@ -20499,6 +20497,12 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 var _trunc = __webpack_require__(87);
 
@@ -20515,6 +20519,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
     computed: (0, _vuex.mapGetters)({
         conversations: 'allConversations',
+        current_conversation: 'currentConversation',
         loading: 'loadingConversations'
     }),
     methods: _extends({}, (0, _vuex.mapActions)(['getConversations', 'getConversation']), {
@@ -58246,6 +58251,10 @@ var objectKeys = Object.keys || function (obj) {
 /* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(137)
+
 var Component = __webpack_require__(9)(
   /* script */
   __webpack_require__(80),
@@ -58279,6 +58288,10 @@ module.exports = Component.exports
 /***/ }),
 /* 112 */
 /***/ (function(module, exports, __webpack_require__) {
+
+
+/* styles */
+__webpack_require__(139)
 
 var Component = __webpack_require__(9)(
   /* script */
@@ -58609,43 +58622,53 @@ if (false) {
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return (_vm.loading) ? _c('div', [_c('div', {
     staticClass: "loader"
-  })]) : (_vm.conversation) ? _c('div', [(_vm.conversation.users.data.length) ? _c('ul', {
+  })]) : (_vm.conversation) ? _c('div', {
+    staticClass: "chat"
+  }, [(_vm.conversation.users.data.length) ? _c('ul', {
     staticClass: "list-inline"
   }, [_c('li', [_c('strong', [_vm._v("In conversation : ")])]), _vm._v(" "), _vm._l((_vm.conversation.users.data), function(user) {
     return _c('li', [_vm._v(" " + _vm._s(user.name) + " ")])
-  })], 2) : _vm._e(), _vm._v(" "), _c('conversation-add-user-form'), _vm._v(" "), _c('hr'), _vm._v(" "), _c('conversation-reply-form'), _vm._v(" "), _c('hr'), _vm._v(" "), _vm._l((_vm.conversation.replies.data), function(reply) {
-    return _c('div', {
-      staticClass: "media"
-    }, [_c('div', {
-      staticClass: "media-left"
-    }, [_c('img', {
-      attrs: {
-        "src": reply.user.data.avatar,
-        "alt": "reply.user.data.name + 'avatar'"
-      }
-    })]), _vm._v(" "), _c('div', {
-      staticClass: "media-body"
-    }, [_c('p', [_vm._v(" " + _vm._s(reply.user.data.name) + " • " + _vm._s(reply.created_at_human) + " ")]), _vm._v(" "), _c('div', {
-      staticClass: "panel panel-default"
-    }, [_c('div', {
-      staticClass: "panel-body"
-    }, [_vm._v("\n                    " + _vm._s(reply.body) + "\n                ")])])])])
-  }), _vm._v(" "), _c('div', {
-    staticClass: "media"
-  }, [_c('div', {
-    staticClass: "media-left"
-  }, [_c('img', {
+  })], 2) : _vm._e(), _vm._v(" "), _c('conversation-add-user-form'), _vm._v(" "), _c('hr'), _vm._v(" "), _c('conversation-reply-form'), _vm._v(" "), _c('hr'), _vm._v(" "), _c('transition-group', {
     attrs: {
-      "src": _vm.conversation.user.data.avatar,
-      "alt": "conversation.user.data.name + 'avatar'"
+      "name": "slide-fade",
+      "tag": "div"
     }
-  })]), _vm._v(" "), _c('div', {
-    staticClass: "media-body"
-  }, [_c('p', [_vm._v(" " + _vm._s(_vm.conversation.user.data.name) + " • " + _vm._s(_vm.conversation.created_at_human) + " ")]), _vm._v(" "), _c('div', {
-    staticClass: "panel panel-default"
+  }, _vm._l((_vm.conversation.replies.data), function(reply) {
+    return _c('div', {
+      key: reply.id,
+      class: ['message flex-end flex', _vm.user_id === reply.user.data.id ? ' ' : 'row-reverse'],
+      attrs: {
+        "data-toggle": "tooltip",
+        "title": reply.user.data.name + ' ' + reply.created_at_human
+      }
+    }, [_c('div', {
+      class: ['bubble flex-grow', _vm.user_id === reply.user.data.id ? 'you' : 'me']
+    }, [_vm._v("\n            " + _vm._s(reply.body) + "\n        ")]), _vm._v(" "), _c('img', {
+      staticStyle: {
+        "border-radius": "50%",
+        "align-self": "flex-start"
+      },
+      attrs: {
+        "src": reply.user.data.avatar
+      }
+    })])
+  })), _vm._v(" "), _c('div', {
+    class: ['message flex-end flex', _vm.user_id === _vm.conversation.user.data.id ? ' ' : 'row-reverse'],
+    attrs: {
+      "data-toggle": "tooltip",
+      "title": _vm.conversation.user.data.name + ' ' + _vm.conversation.created_at_human
+    }
   }, [_c('div', {
-    staticClass: "panel-body"
-  }, [_vm._v("\n                    " + _vm._s(_vm.conversation.body) + "\n                ")])])])])], 2) : _c('div', {
+    class: ['bubble flex-grow', _vm.user_id === _vm.conversation.user.data.id ? 'you' : 'me']
+  }, [_vm._v("\n            " + _vm._s(_vm.conversation.body) + "\n        ")]), _vm._v(" "), _c('img', {
+    staticStyle: {
+      "border-radius": "50%",
+      "align-self": "flex-start"
+    },
+    attrs: {
+      "src": _vm.conversation.user.data.avatar
+    }
+  })])], 1) : _c('div', {
     staticClass: "text-center"
   }, [_vm._v("Select a conversation")])
 },staticRenderFns: []}
@@ -58724,13 +58747,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("\n        All conversations\n    ")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
-  }, [(_vm.loading) ? _c('div', {
+  }, [_vm._v("\n        All conversations\n    ")]), _vm._v(" "), (_vm.loading) ? _c('div', {
     staticClass: "loader"
-  }) : (_vm.conversations.length) ? _vm._l((_vm.conversations), function(conversation) {
+  }) : (_vm.conversations.length) ? _c('transition-group', {
+    attrs: {
+      "name": "list",
+      "tag": "div"
+    }
+  }, _vm._l((_vm.conversations), function(conversation) {
     return _c('div', {
-      staticClass: "media"
+      key: conversation.id,
+      class: ['conversation-thread', _vm.current_conversation && (_vm.current_conversation.id === conversation.id) ? 'in_focus' : '']
     }, [_c('div', {
       staticClass: "media-body"
     }, [_c('a', {
@@ -58756,7 +58783,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       })
     })), _vm._v(" "), _c('li', [_vm._v(" Last reply " + _vm._s(conversation.last_reply_human))])])])])
-  }) : _c('div', {}, [_vm._v("\n            No conversations\n        ")])], 2)])
+  })) : _c('div', {
+    staticClass: "text-center"
+  }, [_c('h4', [_vm._v(" No conversations")])])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -59087,6 +59116,79 @@ module.exports = function(module) {
 __webpack_require__(35);
 module.exports = __webpack_require__(36);
 
+
+/***/ }),
+/* 129 */,
+/* 130 */,
+/* 131 */,
+/* 132 */,
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(93)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+/***/ }),
+/* 137 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(136);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(124)("4e653d09", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-bd15a8a2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Conversation.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-bd15a8a2\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Conversation.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 138 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(93)();
+exports.push([module.i, "\n.in_focus {\n    background: rgba(242, 242, 242, 0.6);;\n    border-radius: 5px;\n    transition: all 0.5s ease-in-out;\n}\n.conversation-thread {\n    padding:15px;\n}\n", ""]);
+
+/***/ }),
+/* 139 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(138);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(124)("9767d70e", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-de482958\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Conversations.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-de482958\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Conversations.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);
