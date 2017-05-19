@@ -7,11 +7,15 @@
 
             <div v-if="loading" class="loader"></div>
             <transition-group name="list" tag="div" v-else-if="conversations.length">
-            <div  :class="['conversation-thread', current_conversation && (current_conversation.id === conversation.id) ? 'in_focus' : '' ]" v-for="conversation in conversations"   :key="conversation.id">
+            <div  :class="['conversation-thread', current_conversation && (current_conversation.id === conversation.id) ? 'in_focus' : '' ]"
+                  v-for="conversation in conversations"
+                  :key="conversation.id"
+                  @click.prevent="getConversation(conversation.id)"
+            >
 
                 <div class="media-body" >
-                    <a href="#" @click.prevent="getConversation(conversation.id)"> {{ trunc(conversation.body, 50) }}</a>
-                    <p class="text-muted">
+                    <p > {{ trunc(conversation.body, 50) }}</p>
+                    <p >
                         You and {{ conversation.participant_count }} {{ pluralize('other', conversation.participant_count) }}
                     </p>
                     <ul class="list-inline">
@@ -62,19 +66,11 @@
 </script>
 
 <style>
-    .in_focus {
-        background: rgba(242, 242, 242, 0.6);;
-        border-radius: 5px;
-        -webkit-transition: all 0.5s ease-in-out;
-        -moz-transition: all 0.5s ease-in-out;
-        -ms-transition: all 0.5s ease-in-out;
-        -o-transition: all 0.5s ease-in-out;
-        transition: all 0.5s ease-in-out;
-    }
 
 
 
-    .conversation-thread {
-        padding:15px;
-    }
+
+
+
+
 </style>

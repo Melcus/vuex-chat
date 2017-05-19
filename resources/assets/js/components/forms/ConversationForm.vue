@@ -11,7 +11,6 @@
                 <div class="form-group">
                     <input type="text" id="users" placeholder="Start typing to find users" class="form-control">
                 </div>
-
                 <ul v-if="recipients.length" class="list-inline">
                     <li><strong> To : </strong></li>
                     <li v-for="recipient in recipients"> {{ recipient.name }} [ <a href="#"
@@ -35,7 +34,7 @@
 
 <script>
     import {userautocomplete} from '../../helpers/autocomplete'
-    import{mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         data()

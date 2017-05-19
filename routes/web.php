@@ -33,4 +33,6 @@ Route::get('/conversations/{conversation}' , 'ConversationController@show')->nam
 
 Route::Get('testing', function() {
 
+	$conv = \App\Models\Conversation::first();
+	dd($conv->created_at->format('jS F, H:i'));
 });

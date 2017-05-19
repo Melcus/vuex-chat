@@ -1,60 +1,50 @@
 .bubble{
   background-color: #ffffff;
   border-radius: 5px;
-  box-shadow: 0 0 6px rgba(48, 151, 209, 0.39);
+  box-shadow: 0 0 6px rgba(48, 209, 127, 0.21);
   display: inline-block;
   padding: 10px 18px;
   position: relative;
   vertical-align: top;
 }
 
-.bubble::before {
-  background-color: #ffffff;
-  content: "\00a0";
-  display: block;
-  height: 16px;
-  position: absolute;
-  top: 11px;
-  transform:             rotate( 29deg ) skew( -35deg );
-  -moz-transform:    rotate( 29deg ) skew( -35deg );
-  -ms-transform:     rotate( 29deg ) skew( -35deg );
-  -o-transform:      rotate( 29deg ) skew( -35deg );
-  -webkit-transform: rotate( 29deg ) skew( -35deg );
-  width:  20px;
-  z-index: -1;
-}
+//.bubble::before {
+//  background-color: #ffffff;
+//  content: "\00a0";
+//  display: block;
+//  height: 16px;
+//  position: absolute;
+//  top: 11px;
+//  transform:             rotate( 29deg ) skew( -35deg );
+//  -moz-transform:    rotate( 29deg ) skew( -35deg );
+//  -ms-transform:     rotate( 29deg ) skew( -35deg );
+//  -o-transform:      rotate( 29deg ) skew( -35deg );
+//  -webkit-transform: rotate( 29deg ) skew( -35deg );
+//  width:  20px;
+//  z-index: -1;
+//}
 
 .me {
   float: left;
   margin: 5px 45px 5px 20px;
 }
 
-.me::before {
-
-  box-shadow: 0 0 6px rgba(48, 151, 209, 0.39);
-  left: -9px;
-}
+//.me::before {
+//
+//  box-shadow: 0 0 6px rgba(48, 151, 209, 0.39);
+//  left: 0;
+//}
 
 .you {
   float: right;
   margin: 5px 20px 5px 45px;
 }
 
-.you::before {
-
-  box-shadow: 0 0 6px rgba(48, 151, 209, 0.39);
-  right: -9px;
-}
-
-
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
-  transform: translateY(10px);
-}
+//.you::before {
+//
+//  box-shadow: 0 0 6px rgba(48, 151, 209, 0.39);
+//  right: 0;
+//}
 
 
 .slide-fade-enter-active {
@@ -67,4 +57,35 @@
   /* .slide-fade-leave-active for <2.1.8 */ {
   transform: translateX(10px);
   opacity: 0;
+}
+
+.chat-image {
+  border-radius:50%; align-self: flex-start; border:1px solid white;
+}
+
+.conversation-thread {
+  padding:15px;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.conversation-thread:hover {
+  background: rgba(17, 36, 35, 0.06);
+}
+.in_focus {
+  background: rgba(46, 97, 94, 0.8)!important;
+  color:white;
+  /*border-radius: 5px;*/
+  padding-left: 30px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.in_focus > .media-body >a {
+  color:white;
 }

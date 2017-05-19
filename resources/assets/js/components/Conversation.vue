@@ -17,22 +17,25 @@
 
         <transition-group name="slide-fade" tag="div">
         <div :class="['message flex-end flex', user_id === reply.user.data.id ? ' ' : 'row-reverse' ]"
-             v-for="reply in conversation.replies.data" data-toggle="tooltip"
-             :title="reply.user.data.name +   ' ' +  reply.created_at_human"
-             :key="reply.id">
+             v-for="reply in conversation.replies.data"  :key="reply.id">
             <div :class="['bubble flex-grow', user_id === reply.user.data.id ? 'you' : 'me' ]">
-                {{ reply.body }}
+                <span class="pull-left" style="padding-right: 10px"><small>{{ reply.user.data.name }}</small></span> <span class="pull-right"><small>{{  reply.created_at_formatted }}</small></span>
+                <br>
+               <p>{{ reply.body }}</p>
             </div>
-            <img :src="reply.user.data.avatar" style="border-radius:50%; align-self: flex-start">
+            <img :src="reply.user.data.avatar" class="chat-image" data-toggle="tooltip"
+                 :title=" reply.created_at_human" data-placement="bottom">
         </div>
         </transition-group>
 
         <div :class="['message flex-end flex', user_id === conversation.user.data.id ? ' ' : 'row-reverse' ]"
-             data-toggle="tooltip" :title="conversation.user.data.name +   ' ' +  conversation.created_at_human">
+           >
             <div :class="['bubble flex-grow', user_id === conversation.user.data.id ? 'you' : 'me' ]">
+                <span class="pull-left" style="padding-right: 10px"><small>{{ conversation.user.data.name }}</small></span> <span class="pull-right"><small>{{  conversation.created_at_formatted }}</small></span>
+                <br>
                 {{ conversation.body }}
             </div>
-            <img :src="conversation.user.data.avatar" style="border-radius:50%; align-self: flex-start">
+            <img :src="conversation.user.data.avatar" class="chat-image"   data-toggle="tooltip" :title=" conversation.created_at_human" data-placement="top">
         </div>
 
 
@@ -44,6 +47,10 @@
 </template>
 
 <script>
+    $(document).ready(function() {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]', html: true });
+    });
+
     import{mapActions, mapGetters} from 'vuex'
 
     export default {

@@ -12,12 +12,13 @@ class ConversationTransformer extends TransformerAbstract
 	public function transform(Conversation $conversation)
 	{
 		return [
-			'id'                => $conversation->id ,
-			'parent_id'         => $conversation->parent ? $conversation->parent->id : NULL ,
-			'body'              => $conversation->body ,
-			'created_at_human'  => $conversation->created_at->diffForHUmans() ,
-			'last_reply_human'  => $conversation->last_reply ? $conversation->last_reply->diffForHumans() : NULL ,
-			'participant_count' => $conversation->usersExceptCurrentlyAuthenticated->count() ,
+			'id'                   => $conversation->id ,
+			'parent_id'            => $conversation->parent ? $conversation->parent->id : NULL ,
+			'body'                 => $conversation->body ,
+			'created_at_human'     => $conversation->created_at->diffForHUmans() ,
+			'created_at_formatted' => $conversation->created_at->format('jS F, H:i') ,
+			'last_reply_human'     => $conversation->last_reply ? $conversation->last_reply->diffForHumans() : NULL ,
+			'participant_count'    => $conversation->usersExceptCurrentlyAuthenticated->count() ,
 		];
 	}
 	

@@ -58,7 +58,15 @@ const actions = {
             commit('setConversation', response.data.data);
             // OR     dispatch('getConversation', response.data.data.id);
             commit('prependToConversations', response.data.data);
-            // console.log(response)
+            console.log(response);
+
+
+            Echo.private('conversation' + response.data.data.id)
+                .listen('ConversationReplyCreated', (e) => {
+                    commit('appendToConversation', e.data)
+                }).listen('UserAddedToConversation', (e) => {
+                commit('UpdateUsersInConversation', e.data.users.data)
+            });
 
         })
     },
