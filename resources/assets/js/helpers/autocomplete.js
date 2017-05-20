@@ -11,7 +11,11 @@ export const userautocomplete = selector => {
       displayKey : 'name',
       templates : {
           suggestion(suggestion) {
-              return '<span>' + suggestion.name + '</span>'
+              if(suggestion.id !== Laravel.user.id) {
+                  return '<img src=" '+ suggestion.avatar + '">' + " &nbsp; " + '<span>' + suggestion.name + '</span>';
+              }else {
+                  return null;
+              }
           },
        empty : '<div class="aa-empty"> No people found </div>'
       }

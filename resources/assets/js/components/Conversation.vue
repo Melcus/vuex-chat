@@ -16,26 +16,33 @@
         <hr>
 
         <transition-group name="slide-fade" tag="div">
-        <div :class="['message flex-end flex', user_id === reply.user.data.id ? ' ' : 'row-reverse' ]"
-             v-for="reply in conversation.replies.data"  :key="reply.id">
-            <div :class="['bubble flex-grow', user_id === reply.user.data.id ? 'you' : 'me' ]">
-                <span class="pull-left" style="padding-right: 10px"><small>{{ reply.user.data.name }}</small></span> <span class="pull-right"><small>{{  reply.created_at_formatted }}</small></span>
-                <br>
-               <p>{{ reply.body }}</p>
+            <div :class="['message flex-end flex', user_id === reply.user.data.id ? ' ' : 'row-reverse' ]"
+                 v-for="reply in conversation.replies.data" :key="reply.id">
+                <div :class="['bubble flex-grow', user_id === reply.user.data.id ? 'you' : 'me' ]">
+                    <span class="pull-left" style="padding-right: 10px"><small>{{ reply.user.data.name }}</small></span>
+                    <span class="pull-right"><small>{{ reply.created_at_formatted }}</small></span>
+                    <br>
+                        {{ reply.body }}
+                </div>
+                <img :src="reply.user.data.avatar" class="chat-image" data-toggle="tooltip"
+                     :title=" reply.created_at_human" data-placement="bottom">
             </div>
-            <img :src="reply.user.data.avatar" class="chat-image" data-toggle="tooltip"
-                 :title=" reply.created_at_human" data-placement="bottom">
-        </div>
         </transition-group>
 
         <div :class="['message flex-end flex', user_id === conversation.user.data.id ? ' ' : 'row-reverse' ]"
-           >
+        >
             <div :class="['bubble flex-grow', user_id === conversation.user.data.id ? 'you' : 'me' ]">
-                <span class="pull-left" style="padding-right: 10px"><small>{{ conversation.user.data.name }}</small></span> <span class="pull-right"><small>{{  conversation.created_at_formatted }}</small></span>
+                <span class="pull-left" style="padding-right: 10px"><small>{{ conversation.user.data.name
+                    }}</small></span> <span class="pull-right"><small>{{ conversation.created_at_formatted
+                }}</small></span>
                 <br>
-                {{ conversation.body }}
+
+
+                    {{ conversation.body }}
+
             </div>
-            <img :src="conversation.user.data.avatar" class="chat-image"   data-toggle="tooltip" :title=" conversation.created_at_human" data-placement="top">
+            <img :src="conversation.user.data.avatar" class="chat-image" data-toggle="tooltip"
+                 :title=" conversation.created_at_human" data-placement="top">
         </div>
 
 
@@ -47,11 +54,11 @@
 </template>
 
 <script>
-    $(document).ready(function() {
-        $("body").tooltip({ selector: '[data-toggle=tooltip]', html: true });
+    $(document).ready(function () {
+        $("body").tooltip({selector: '[data-toggle=tooltip]', html: true});
     });
 
-    import{mapActions, mapGetters} from 'vuex'
+    import {mapActions, mapGetters} from 'vuex'
 
     export default {
         props: [
@@ -60,7 +67,7 @@
         data()
         {
             return {
-                user_id: null
+                user_id: null,
             }
         },
         computed: mapGetters({
@@ -86,8 +93,6 @@
 </script>
 
 <style>
-
-
 
 
 </style>

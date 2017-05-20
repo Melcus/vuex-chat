@@ -6,6 +6,7 @@
   padding: 10px 18px;
   position: relative;
   vertical-align: top;
+  overflow : auto
 }
 
 //.bubble::before {
@@ -124,4 +125,12 @@
 .new-conversation-textarea {
   max-width: 100%;
   max-height: 300px;
+}
+
+.ejs-embed {
+  //max-width: 50%;
+}
+
+.ejs-embed  img {
+  max-width: 100%;
 }

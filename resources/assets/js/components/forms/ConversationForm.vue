@@ -18,9 +18,9 @@
             <div class="row" v-show="show_new_conversation_form" :key="1" style="margin-top: -20px;">
                 <div class="col-md-12">
 
-                    <form action="" @submit.prevent="send" class="new-conversation-form ">
+                    <form action="" @submit.prevent="handleConversationInput" class="new-conversation-form ">
 
-                        <div class="form-group">
+                        <div class="form-group" id="new-conversation-recipients">
                             <input type="text" id="users" placeholder="Start typing to find users" class="form-control">
                         </div>
 
@@ -31,7 +31,7 @@
                                 ]
                             </li>
                         </ul>
-                        <div class="form-group" style="width: 100%">
+                        <div class="form-group" style="width: 100%" id="new-conversation-message">
                             <label for="message"> Message</label>
                             <textarea id="message" cols="30" rows="4" class="form-control new-conversation-textarea"
                                       v-model="body"></textarea>
@@ -56,7 +56,10 @@
     import {userautocomplete} from '../../helpers/autocomplete'
     import {mapActions, mapGetters} from 'vuex'
 
+
+
     export default {
+
         data()
         {
             return {
@@ -66,6 +69,15 @@
             }
         },
 
+        watch: {
+            body: function () {
+                $('#new-conversation-message').removeClass('has-error')
+            },
+            recipients: function () {
+                $('#new-conversation-recipients').removeClass('has-error')
+            },
+
+        },
         methods: {
             ...mapActions([
                 'createConversation',
@@ -90,6 +102,25 @@
                 this.recipients = [];
                 this.body = null;
             },
+
+            SetError(field) {
+                $('#' + field).addClass('has-error')
+            },
+
+            handleConversationInput(e) {
+                if (!this.recipients.length) {
+                    this.SetError("new-conversation-recipients");
+                    return false;
+                }
+
+                if (!this.body || this.body.trim() === "") {
+                    this.SetError("new-conversation-message");
+                    return false;
+                }
+
+                this.send();
+            },
+
             send() {
                 this.createConversation({
                     recipientIds: this.recipients.map((r) => {
@@ -106,8 +137,11 @@
         mounted()
         {
             let users = userautocomplete('#users').on('autocomplete:selected', (e, selection) => {
-                this.addRecipient(selection);
-                console.log(selection);
+
+                if(Laravel.user.id !== selection.id){
+                    this.addRecipient(selection);
+                }
+
                 users.autocomplete.setVal('');
             })
         }

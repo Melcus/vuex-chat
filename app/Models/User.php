@@ -29,6 +29,8 @@ class User extends Authenticatable
 	];
 	
 	
+	protected $appends = ['avatar'];
+	
 	public function conversations()
 	{
 		return $this->belongsToMany(Conversation::class)->whereNull('parent_id')->orderby('last_reply' , 'desc');
@@ -37,6 +39,11 @@ class User extends Authenticatable
 	public function isInConversation(Conversation $conversation)
 	{
 		return $this->conversations->contains($conversation);
+	}
+	
+	public function getAvatarAttribute()
+	{
+		return $this->avatar();
 	}
 	
 	public function avatar($size = 45)
