@@ -20946,6 +20946,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var _autocomplete = __webpack_require__(34);
 
@@ -20955,9 +20975,11 @@ exports.default = {
     data: function data() {
         return {
             body: null,
-            recipients: []
+            recipients: [],
+            show_new_conversation_form: false
         };
     },
+
 
     methods: _extends({}, (0, _vuex.mapActions)(['createConversation']), {
         addRecipient: function addRecipient(recipient) {
@@ -20975,6 +20997,11 @@ exports.default = {
                 return r.id !== recipient.id;
             });
         },
+        closeNewConversationForm: function closeNewConversationForm() {
+            this.show_new_conversation_form = false;
+            this.recipients = [];
+            this.body = null;
+        },
         send: function send() {
             var _this = this;
 
@@ -20986,6 +21013,7 @@ exports.default = {
             }).then(function () {
                 _this.recipients = [];
                 _this.body = null;
+                _this.show_new_conversation_form = false;
             });
         }
     }),
@@ -58652,6 +58680,10 @@ module.exports = Component.exports
 /* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
+
+/* styles */
+__webpack_require__(141)
+
 var Component = __webpack_require__(9)(
   /* script */
   __webpack_require__(86),
@@ -58748,13 +58780,55 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "panel panel-default"
+  return _c('div', {}, [_c('div', {
+    staticClass: "row "
   }, [_c('div', {
-    staticClass: "panel-heading"
-  }, [_vm._v("\n        New message\n    ")]), _vm._v(" "), _c('div', {
-    staticClass: "panel-body"
+    staticClass: "col-md-12 text-center"
+  }, [(!_vm.show_new_conversation_form) ? _c('span', {
+    staticClass: "btn btn-default text-center",
+    staticStyle: {
+      "width": "100%"
+    },
+    on: {
+      "click": function($event) {
+        _vm.show_new_conversation_form = true
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus-square"
+  }), _vm._v(" New conversation\n            ")]) : _vm._e(), _vm._v(" "), (_vm.show_new_conversation_form) ? _c('span', {
+    staticClass: "btn btn-default text-center",
+    staticStyle: {
+      "width": "100%"
+    },
+    on: {
+      "click": function($event) {
+        _vm.closeNewConversationForm()
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-minus-square"
+  }), _vm._v(" Cancel\n            ")]) : _vm._e()])]), _vm._v(" "), _c('br'), _vm._v(" "), _c('transition-group', {
+    attrs: {
+      "name": "conversation-toggle",
+      "tag": "div"
+    }
+  }, [_c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.show_new_conversation_form),
+      expression: "show_new_conversation_form"
+    }],
+    key: 1,
+    staticClass: "row",
+    staticStyle: {
+      "margin-top": "-20px"
+    }
+  }, [_c('div', {
+    staticClass: "col-md-12"
   }, [_c('form', {
+    staticClass: "new-conversation-form ",
     attrs: {
       "action": ""
     },
@@ -58764,9 +58838,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.send($event)
       }
     }
-  }, [_vm._m(0), _vm._v(" "), (_vm.recipients.length) ? _c('ul', {
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "id": "users",
+      "placeholder": "Start typing to find users"
+    }
+  })]), _vm._v(" "), (_vm.recipients.length) ? _c('ul', {
     staticClass: "list-inline"
-  }, [_vm._m(1), _vm._v(" "), _vm._l((_vm.recipients), function(recipient) {
+  }, [_c('li', [_c('strong', [_vm._v(" To : ")])]), _vm._v(" "), _vm._l((_vm.recipients), function(recipient) {
     return _c('li', [_vm._v(" " + _vm._s(recipient.name) + " [ "), _c('a', {
       attrs: {
         "href": "#"
@@ -58777,9 +58860,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.removeRecipient(recipient)
         }
       }
-    }, [_vm._v("x")]), _vm._v("\n                    ]\n                ")])
+    }, [_vm._v("x")]), _vm._v("\n                            ]\n                        ")])
   })], 2) : _vm._e(), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    staticStyle: {
+      "width": "100%"
+    }
   }, [_c('label', {
     attrs: {
       "for": "message"
@@ -58791,7 +58877,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.body),
       expression: "body"
     }],
-    staticClass: "form-control",
+    staticClass: "form-control new-conversation-textarea",
     attrs: {
       "id": "message",
       "cols": "30",
@@ -58806,30 +58892,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.body = $event.target.value
       }
     }
-  })]), _vm._v(" "), _vm._m(2)])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "type": "text",
-      "id": "users",
-      "placeholder": "Start typing to find users"
-    }
-  })])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('li', [_c('strong', [_vm._v(" To : ")])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('button', {
     staticClass: "btn btn-default",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Send")])])
-}]}
+  }, [_vm._v("Start conversation")])])])])])])], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -59200,6 +59271,46 @@ module.exports = function(module) {
 __webpack_require__(37);
 module.exports = __webpack_require__(38);
 
+
+/***/ }),
+/* 133 */,
+/* 134 */,
+/* 135 */,
+/* 136 */,
+/* 137 */,
+/* 138 */,
+/* 139 */,
+/* 140 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(19)();
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+/***/ }),
+/* 141 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(140);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(20)("2ad408bb", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2ceeb9f3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ConversationForm.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-2ceeb9f3\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ConversationForm.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
 
 /***/ })
 /******/ ]);
