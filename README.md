@@ -16,7 +16,7 @@
 - [ ] Remove users from chat + animation ( on leave and enter )
 - [ ] Emoji
 - [ ] Update time ago (moment js)
-- [] Load more / pagination
+- [ ] Load more / pagination
 - [x] New conversation transition
 - [x] New reply transition
 - [x] Web notifications (if tab is not active)
