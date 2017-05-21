@@ -22,7 +22,7 @@
 - [ ] Update time ago (moment js)
 
 ## Screenshot
-![Chat demo](http://i.imgur.com/qSxH86Z.png)
+![Chat demo](https://i.imgur.com/6CUoUqy.png)
 
 
 ## Testing
