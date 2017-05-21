@@ -20804,7 +20804,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 var _trunc = __webpack_require__(89);
 
@@ -23889,7 +23888,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(13)();
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 /***/ }),
 /* 98 */
@@ -59498,7 +59497,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }, [_c('div', {
       staticClass: "media-body"
-    }, [_c('p', [_vm._v(" " + _vm._s(_vm.trunc(conversation.body, 50)))]), _vm._v(" "), _c('p', [_vm._v("\n                    You and " + _vm._s(conversation.participant_count) + " " + _vm._s(_vm.pluralize('other', conversation.participant_count)) + "\n                ")]), _vm._v(" "), _c('ul', {
+    }, [_c('span', [_vm._v(" " + _vm._s(_vm.trunc(conversation.body, 40)))]), _vm._v(" "), _c('span', {
+      staticClass: "pull-right"
+    }, [_vm._v("\n                  You and " + _vm._s(conversation.participant_count) + " " + _vm._s(_vm.pluralize('other', conversation.participant_count)) + "\n                ")]), _vm._v(" "), _c('ul', {
       staticClass: "list-inline"
     }, [_c('li', _vm._l((conversation.users.data), function(user) {
       return _c('img', {
@@ -59508,7 +59509,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           "alt": "user.name + ' avatar'"
         }
       })
-    })), _vm._v(" "), _c('li', [_vm._v(" Last reply " + _vm._s(conversation.last_reply_human))])])])])
+    })), _vm._v(" "), _c('li', {
+      staticClass: "pull-right"
+    }, [_vm._v(" Last reply " + _vm._s(conversation.last_reply_human))])])])])
   })) : _c('div', {
     staticClass: "text-center"
   }, [_c('h4', [_vm._v(" No conversations")])])], 1)

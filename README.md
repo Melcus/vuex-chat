@@ -12,14 +12,16 @@
 ## To DO
 
 - [ ] Message read status(notifications) + counter of unread messages on every conversation (redis)
-- [x] New conversation transition
-- [x] New reply transition
 - [ ] is typing event broadcast (expensive)
 - [ ] Remove users from chat + animation ( on leave and enter )
 - [ ] Emoji
+- [ ] Update time ago (moment js)
+- [] Load more / pagination
+- [x] New conversation transition
+- [x] New reply transition
 - [x] Web notifications (if tab is not active)
 - [x] If Author, avatar on the right side
-- [ ] Update time ago (moment js)
+- [x] Compact all conversations
 
 ## Screenshot
 ![Chat demo](https://i.imgur.com/6CUoUqy.png)

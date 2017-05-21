@@ -14,22 +14,21 @@
             >
 
                 <div class="media-body" >
-                    <p > {{ trunc(conversation.body, 50) }}</p>
-                    <p >
-                        You and {{ conversation.participant_count }} {{ pluralize('other', conversation.participant_count) }}
-                    </p>
+                    <span > {{ trunc(conversation.body, 40) }}</span>
+                    <span class="pull-right">
+                      You and {{ conversation.participant_count }} {{ pluralize('other', conversation.participant_count) }}
+                    </span>
                     <ul class="list-inline">
                         <li>
                             <img :src="user.avatar" :title="user.name" alt="user.name + ' avatar'"
                                  v-for="user in conversation.users.data"/>
                         </li>
-                        <li> Last reply {{ conversation.last_reply_human }}</li>
+                        <li class="pull-right"> Last reply {{ conversation.last_reply_human }}</li>
                     </ul>
                 </div>
 
             </div>
             </transition-group>
-
 
             <div class="text-center" v-else>
                <h4> No conversations</h4>

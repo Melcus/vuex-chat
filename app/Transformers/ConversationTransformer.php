@@ -16,6 +16,7 @@ class ConversationTransformer extends TransformerAbstract
 			'parent_id'            => $conversation->parent ? $conversation->parent->id : NULL ,
 			'body'                 => $conversation->body ,
 			'created_at_human'     => $conversation->created_at->diffForHUmans() ,
+			'last_reply_human'     => $conversation->last_reply ? $conversation->last_reply->diffForHumans() : NULL ,
 			'created_at_formatted' => $conversation->created_at->format('jS F, H:i') ,
 			'participant_count'    => $conversation->usersExceptCurrentlyAuthenticated->count() ,
 		];
