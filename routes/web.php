@@ -11,6 +11,8 @@
 |
 */
 
+use App\Transformers\ConversationTransformer;
+
 Route::get('/' , function () {
 	return view('welcome');
 });
@@ -33,6 +35,9 @@ Route::get('/conversations/{conversation}' , 'ConversationController@show')->nam
 
 Route::Get('testing', function() {
 
-	$conv = \App\Models\Conversation::first();
-	dd($conv->created_at->format('jS F, H:i'));
+	dd('https://www.gravatar.com/avatar/' . md5('tirdea.mihail.vlinde.com') . 'x?s=' . '45' . '&d=mm');
+	
+	
 });
+
+

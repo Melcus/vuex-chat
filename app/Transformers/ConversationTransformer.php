@@ -17,7 +17,6 @@ class ConversationTransformer extends TransformerAbstract
 			'body'                 => $conversation->body ,
 			'created_at_human'     => $conversation->created_at->diffForHUmans() ,
 			'created_at_formatted' => $conversation->created_at->format('jS F, H:i') ,
-			'last_reply_human'     => $conversation->last_reply ? $conversation->last_reply->diffForHumans() : NULL ,
 			'participant_count'    => $conversation->usersExceptCurrentlyAuthenticated->count() ,
 		];
 	}

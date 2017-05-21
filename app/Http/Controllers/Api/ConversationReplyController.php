@@ -29,6 +29,7 @@ class ConversationReplyController extends Controller
 		$conversation->touchLastReply();
 		
 		$conversation->load('users');
+		
 		broadcast(new ConversationReplyCreated($reply))->toOthers();
 		
 		return fractal()

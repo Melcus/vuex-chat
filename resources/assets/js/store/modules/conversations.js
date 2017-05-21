@@ -26,12 +26,32 @@ const actions = {
             commit('setConversations', response.data.data);
             commit('setConversationsLoading', false);
 
-            // console.log('user' + Laravel.user.id);
             Echo.private('user' + Laravel.user.id)
                 .listen('ConversationCreated', (e) => {
+
                     commit('prependToConversations', e.data)
                 }).listen('ConversationReplyCreated', (e) => {
-                commit('prependToConversations', e.data.parent.data)
+
+                commit('prependToConversations', e.data.parent.data);
+
+                if(window.Notification && Notification.permission !== ' denied') {
+                    Notification.requestPermission((status) => {
+                        if( !ifvisible.now() ){
+                            // Display notification
+                            new Notification('New comment for ' +e.data.parent.data.body  , {
+                                body :  e.data.user.data.name + ' : ' + e.data.body,
+                                icon :  e.data.user.data.avatar
+                            });
+                        }
+
+
+
+
+
+
+                    })
+                }
+
                 }).listen('UserAddedToConversation', (e) => {
                 commit('updateConversationInList', e.data)
             });

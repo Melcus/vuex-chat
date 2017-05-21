@@ -17,12 +17,12 @@
 - [ ] is typing event broadcast (expensive)
 - [ ] Remove users from chat + animation ( on leave and enter )
 - [ ] Emoji
-- [ ] Web notifications
+- [x] Web notifications (if tab is not active)
 - [x] If Author, avatar on the right side
 - [ ] Update time ago (moment js)
 
 ## Screenshot
-![Chat demo](http://i.imgur.com/12V1Jey.png)
+![Chat demo](http://i.imgur.com/qSxH86Z.png)
 
 
 ## Testing

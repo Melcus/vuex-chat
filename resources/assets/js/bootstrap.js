@@ -46,6 +46,7 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
+window.ifvisible = require('ifvisible.js');
 
 import Echo from 'laravel-echo'
 

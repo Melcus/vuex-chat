@@ -28,7 +28,8 @@ const actions = {
 
             Echo.private('conversation' + id)
                 .listen('ConversationReplyCreated', (e) => {
-                    commit('appendToConversation', e.data)
+                    commit('appendToConversation', e.data);
+                    //notification
                 }).listen('UserAddedToConversation', (e) => {
                 commit('UpdateUsersInConversation', e.data.users.data)
             });
@@ -45,7 +46,8 @@ const actions = {
             body: body
         }).then((response) => {
             commit('appendToConversation', response.data.data);
-            commit('prependToConversations', response.data.data.parent.data);
+
+            commit('prependToConversations', response.data.data.parent.data, response.data.data);
 
         })
     },
@@ -58,8 +60,6 @@ const actions = {
             commit('setConversation', response.data.data);
             // OR     dispatch('getConversation', response.data.data.id);
             commit('prependToConversations', response.data.data);
-            console.log(response);
-
 
             Echo.private('conversation' + response.data.data.id)
                 .listen('ConversationReplyCreated', (e) => {

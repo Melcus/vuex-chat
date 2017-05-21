@@ -22,6 +22,7 @@ export default {
             axios.post('/webapi/conversations/' + id + '/reply', {
                 body: body
             }).then((response) => {
+
                 resolve(response)
             })
         })
